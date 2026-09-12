@@ -115,11 +115,13 @@ class UserSeeder extends Seeder
             $user = User::updateOrCreate(
                 ['email' => $userData['email']],
                 [
-                    'name' => $userData['name'],
-                    'password' => $hashedPassword,
+                    'name'         => $userData['name'],
+                    'country_code' => $userData['country_code'],
+                    'phone'        => $userData['phone'],
+                    'password'     => $hashedPassword,
                 ]
             );
-            
+
             // Only sync role if needed
             if (!$user->hasRole($userData['role'])) {
                 $user->syncRoles([$userData['role']]);
